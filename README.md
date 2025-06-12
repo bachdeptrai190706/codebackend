@@ -23,3 +23,4 @@ Dự án web bán pizza được xây dựng bằng Django. Người dùng có t
 1. Clone repo:
    ```bash
    git clone https://github.com/bachdeptrai190706/codebackend.git
+   cd master
