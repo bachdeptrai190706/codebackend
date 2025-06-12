@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Giỏ Hàng{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4 text-center fw-semibold">Giỏ Hàng Của Bạn</h2>
+
+  {% if items %}
+  <table class="table table-striped align-middle text-center">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">Sản phẩm</th>
+        <th scope="col">Giá</th>
+        <th scope="col">Số lượng</th>
+        <th scope="col">Thành tiền</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.product.price|floatformat:0 }} đ</td>
+        <td>
+          <div class="d-flex justify-content-center align-items-center">
+            <a href="{% url 'decrease_quantity' item.id %}" class="btn btn-outline-secondary btn-sm me-2">-</a>
+            <span class="mx-2">{{ item.quantity }}</span>
+            <a href="{% url 'increase_quantity' item.id %}" class="btn btn-outline-secondary btn-sm ms-2">+</a>
+          </div>
+        </td>
+        <td>{{ item.get_total_price|floatformat:0 }} đ</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="text-end mb-3">
+    <strong>Tổng cộng: {{ total|floatformat:0 }} đ</strong>
+  </div>
+
+ <div class="d-flex justify-content-between">
+  <a href="{% url 'home' %}" class="btn btn-outline-secondary rounded-pill px-4">
+    ← Tiếp tục mua hàng
+  </a>
+  <a href="{% url 'checkout' %}" class="btn btn-primary rounded-pill px-4">
+    Thanh toán
+  </a>
+</div>
+
+  {% else %}
+  <p class="text-center text-muted">Giỏ hàng của bạn đang trống.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container mt-4">
+    <h2>{{ product.name }}</h2>
+      <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+    
+        
+        .img-fluid {
+            max-width: 500px;
+            max-height: 400px;
+            text-align: right;
+            padding: 20px 0;
+            
+        }
+    </style>
+    <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+    
+    <p class="mt-3">{{ product.description }}</p>
+    <p class="fw-bold">{{ product.price|floatformat:0 }} đ</p>
+
+    <!-- ✅ Thêm dòng số lượng còn lại -->
+    <p class="text-danger fw-semibold">
+      {% if product.number > 0 %}
+        Còn lại: {{ product.number }} sản phẩm
+      {% else %}
+        Hết hàng
+      {% endif %}
+    </p>
+
+    <a href="/" class="btn btn-secondary mt-3">Quay lại</a>
+  </div>
+{% endblock %}
